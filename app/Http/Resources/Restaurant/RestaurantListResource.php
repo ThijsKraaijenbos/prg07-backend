@@ -19,9 +19,10 @@ class RestaurantListResource extends JsonResource
             "name" => $this->name,
             "img_url" => $this->img_url,
             "address" => $this->address,
-
-            "longitude" => $this->when($request->longlat, $this->longitude),
-            "latitude" => $this->when($request->longlat, $this->latitude),
+            "longitude" => $this->when($request->map, $this->longitude),
+            "latitude" => $this->when($request->map, $this->latitude),
+            "star_count" => $this->when($request->map, $this->star_count),
+            "tags" => $this->when($request->map, $this->tags),
         ];
     }
 }

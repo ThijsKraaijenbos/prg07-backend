@@ -18,8 +18,6 @@ class RestaurantResource extends JsonResource
             "id" => $this->id,
             "name" => $this->name,
             "address" => $this->address,
-            "star_count" => $this->star_count,
-            "tags" => $this->whenLoaded("tags"),
 
             "img_url" => $this->when($request->full_detail, $this->img_url),
             "description" => $this->when($request->full_detail, $this->description),
