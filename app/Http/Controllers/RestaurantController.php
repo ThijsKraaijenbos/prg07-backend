@@ -9,8 +9,15 @@ use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
-    public function index() {
-        $restaurants = Restaurant::all();
+    public function index(Request $request) {
+        if ($request->recommended) {
+            $collection = Restaurant::where('star_count', '>=', 4)->get();
+            $restaurants = $collection->shuffle();
+        } else {
+            $restaurants = Restaurant::all();
+        }
+
+
         return response()->json(RestaurantListResource::collection($restaurants));
     }
 
