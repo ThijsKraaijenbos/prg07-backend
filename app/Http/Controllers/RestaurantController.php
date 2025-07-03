@@ -12,7 +12,7 @@ class RestaurantController extends Controller
     public function index(Request $request) {
         if ($request->recommended) {
             $collection = Restaurant::where('star_count', '>=', 4)->get();
-            $restaurants = $collection->shuffle();
+            $restaurants = $collection->shuffle()->take(3)->sortByDesc('star_count')->values();
         } else {
             $restaurants = Restaurant::all();
         }
