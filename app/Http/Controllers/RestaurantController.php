@@ -13,8 +13,12 @@ class RestaurantController extends Controller
         if ($request->recommended) {
             $collection = Restaurant::where('star_count', '>=', 4)->get();
             $restaurants = $collection->shuffle()->take(3)->sortByDesc('star_count')->values();
+        } else if ($request->filter) {
+            $filter = $request->filter;
+            $restaurants = Restaurant::where("name", "like", "%$filter%")->get();
         } else {
             $restaurants = Restaurant::all();
+
         }
 
 
